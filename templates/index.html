@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Stress Detector</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<header class="top">
+  <h1>🧠 Stress Detector</h1>
+  <p>Track. Improve. Heal.</p>
+</header>
+
+<nav>
+  <span class="active">Dashboard</span>
+  <a href="/history">History</a>
+  <a href="/settings">Settings</a>
+</nav>
+
+<main class="dashboard">
+
+  <!-- LEFT: CAMERA -->
+  <section class="camera-box">
+    <h2>Live Camera</h2>
+    <video id="video" autoplay muted></video>
+    <div class="btn-row">
+      <button id="startBtn" class="green">Start Camera</button>
+      <button id="stopBtn" class="gray">Stop Camera</button>
+    </div>
+  </section>
+
+  <!-- CENTER: STRESS -->
+  <section class="stress-box">
+    <h2>Current Stress Level</h2>
+
+    <div id="stressValue" class="stress-badge">--%</div>
+
+    <p id="suggestion" class="suggestion">
+      Measuring...
+    </p>
+  </section>
+
+</main>
+
+<!-- INFO CARDS -->
+<section class="cards">
+  <div class="card">
+    🔥 Current Streak
+    <div id="streak">0 days</div>
+  </div>
+
+  <div class="card">
+    📊 Avg Stress
+    <div id="avgStress">--</div>
+  </div>
+
+  <div class="card">
+    ⏱ Last Check
+    <div id="lastCheck">--</div>
+  </div>
+</section>
+
+<div class="save-box">
+  <button id="saveBtn" class="blue">Save Today’s Result</button>
+  <p class="footer">Made with ❤️ to help you feel better</p>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
