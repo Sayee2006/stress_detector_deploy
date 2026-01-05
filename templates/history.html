@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Stress History</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    body {
+      background: #111;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    table {
+      margin: auto;
+      border-collapse: collapse;
+      width: 90%;
+      max-width: 800px;
+      background: #1c1c1c;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    thead {
+      background: #2d7cff;
+    }
+
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid #333;
+      text-align: center;
+    }
+
+    th {
+      font-weight: bold;
+      color: white;
+    }
+
+    tr:hover {
+      background: #2a2a2a;
+    }
+
+    .low {
+      color: #4caf50;
+      font-weight: bold;
+    }
+
+    .medium {
+      color: #ffb300;
+      font-weight: bold;
+    }
+
+    .high {
+      color: #f44336;
+      font-weight: bold;
+    }
+
+    a {
+      color: #2d7cff;
+      text-decoration: none;
+      display: inline-block;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+
+<body>
+
+<a href="/">⬅ Back to Dashboard</a>
+
+<h1>📜 Stress History (Last 20 Records)</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Date & Time</th>
+      <th>Stress %</th>
+      <th>Status</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    {% for r in records %}
+    <tr>
+      <td>{{ r.created_at.strftime("%d-%m-%Y %I:%M %p") }}</td>
+
+      <td
+        class="{% if r.stress < 40 %}low{% elif r.stress < 70 %}medium{% else %}high{% endif %}">
+        {{ r.stress }}%
+      </td>
+
+      <td>
+        {% if r.stress < 40 %}
+          Relaxed 😊
+        {% elif r.stress < 70 %}
+          Moderate 😐
+        {% else %}
+          High 😟
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+</body>
+</html>
